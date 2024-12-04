@@ -1,5 +1,6 @@
 import streamlit as st
 import pickle
+import streamlit.components.v1 as components
 
 # Load the model and vectorizer
 try:
@@ -7,6 +8,16 @@ try:
     cv = pickle.load(open('vec.pkl', 'rb'))
 except FileNotFoundError:
     st.error("Model or vectorizer file not found. Please upload 'spam.pkl' and 'vec.pkl'.")
+
+# Custom HTML meta tags for social media sharing
+meta_tags = """
+<meta property="og:title" content="SpamSearchAi: Intelligent Email Classifier" />
+<meta property="og:description" content="Classify your emails as Spam or Not Spam using AI. Protect your inbox from unwanted emails." />
+<meta property="og:url" content="https://spamsearch.streamlit.app/" />
+"""
+
+# Inject the meta tags into the HTML of your Streamlit app
+components.html(meta_tags, height=0)
 
 # Main function for the Streamlit app
 def main():
